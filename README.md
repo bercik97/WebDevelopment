@@ -9,3 +9,6 @@
 
 ### Calculator
 ![Alt text](calculator.png)
+
+### Tic-tac-toe
+![Alt text](tic-tac-toe.png)
