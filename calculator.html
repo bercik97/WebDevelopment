@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Calculator</title>
+    <script>
+        function gen() {
+            for (let i = 0; i <= 9; i++) {
+                let numBtn = document.createElement('button');
+                numBtn.innerText = i.toString();
+                (function (index) {
+                    numBtn.addEventListener('click', function () {
+                        insert(index);
+                    })
+                })(i)
+                document.body.appendChild(numBtn);
+            }
+
+            let plusBtn = document.createElement('button');
+            let minusBtn = document.createElement('button');
+            let multiplicationBtn = document.createElement('button');
+            let divisionBtn = document.createElement('button');
+            let equalsBtn = document.createElement('button');
+            let dotBtn = document.createElement('button');
+            let backspaceBtn = document.createElement('button');
+            let clearBtn = document.createElement('button');
+
+            plusBtn.innerText = '+';
+            plusBtn.addEventListener('click', function () {
+                insert('+');
+            });
+            document.body.appendChild(plusBtn);
+
+            minusBtn.innerText = '-';
+            minusBtn.addEventListener('click', function () {
+                insert('-');
+            });
+            document.body.appendChild(minusBtn);
+
+            multiplicationBtn.innerText = '*';
+            multiplicationBtn.addEventListener('click', function () {
+                insert('*');
+            });
+            document.body.appendChild(multiplicationBtn);
+
+            divisionBtn.innerText = '/';
+            divisionBtn.addEventListener('click', function () {
+                insert('/');
+            });
+            document.body.appendChild(divisionBtn);
+
+            equalsBtn.innerText = '=';
+            equalsBtn.addEventListener('click', function () {
+                equal();
+            });
+            document.body.appendChild(equalsBtn);
+
+            dotBtn.innerText = '.';
+            dotBtn.addEventListener('click', function () {
+                insert('.');
+            });
+            document.body.appendChild(dotBtn);
+
+            backspaceBtn.innerText = 'backspace';
+            backspaceBtn.addEventListener('click', function () {
+                backspace();
+            });
+            document.body.appendChild(backspaceBtn);
+
+            clearBtn.innerText = 'clear';
+            clearBtn.addEventListener('click', function () {
+                clear();
+            });
+            document.body.appendChild(clearBtn);
+        }
+
+        function insert(num) {
+            document.form1.textview.value = document.form1.textview.value + num;
+        }
+
+        function equal() {
+            const exp = document.form1.textview.value;
+            if (exp) {
+                document.form1.textview.value = eval(exp);
+            }
+        }
+
+        function backspace() {
+            const exp = document.form1.textview.value;
+            document.form1.textview.value = exp.substring(0, exp.length - 1);
+        }
+
+        function clear() {
+            document.form1.textview.value = ' ';
+        }
+    </script>
+</head>
+<body onload="gen()">
+<h1>Calculator</h1>
+<form name="form1">
+    <label>
+        <input class="textview" name="textview">
+    </label>
+</form>
+</body>
+</html>
