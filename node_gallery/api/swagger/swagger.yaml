@@ -1,0 +1,184 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: Hello World App
+# during dev, should point to your local machine
+host: localhost:10010
+# basePath prefixes all resource paths 
+basePath: /
+# 
+schemes:
+  # tip: remove http to make production-grade
+  - http
+  - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+paths:
+  /hello:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: hello_world
+    get:
+      description: Returns 'Hello' to the caller
+      # used as the method name of the controller
+      operationId: hello
+      parameters:
+        - name: name
+          in: query
+          description: The name of the person to whom to say hello
+          required: false
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /swagger:
+    x-swagger-pipe: swagger_raw
+# complex objects have schema definitions
+definitions:
+  HelloWorldResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+  ErrorResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+
+  Sesja:
+    title: Sesja
+    type: object
+    properties:
+      Id:
+        type: string
+        example: 123e4567-e89b-12d3-a456-426614174000
+      Token:
+        type: string
+        example: 112233
+      Waznosc:
+        type: string
+        example: 10:20:55 26-10-2022
+
+  Uzytkownik:
+    title: Uzytkownik
+    type: object
+    properties:
+      Id:
+        type: string
+        example: 123e4567-e89b-12d3-a456-426614174000
+      Imie:
+        type: string
+        example: John
+      Nazwisko:
+        type: string
+        example: Doe
+      Login:
+        type: string
+        example: john.doe
+      Haslo:
+        type: string
+        example: superSafePassword1!
+      Email:
+        type: string
+        example: john.doe@mail.com
+
+  Administrator:
+    title: Administrator
+    type: object
+    properties:
+      Prawa:
+        type: string
+        example: ROLE_ADMIN
+
+  Galeria:
+    title: Galeria
+    type: object
+    properties:
+      Id:
+        type: string
+        example: 123e4567-e89b-12d3-a456-426614174000
+      Tytul:
+        type: string
+        example: Galeria X
+      Opis:
+        type: string
+        example: Lorem ipsum
+      Data:
+        type: string
+        example: 26-10-2022
+      Widocznosc:
+        type: boolean
+        example: true
+
+  Tag:
+    title: Tag
+    type: object
+    properties:
+      Id:
+        type: string
+        example: 123e4567-e89b-12d3-a456-426614174000
+      Tekst:
+        type: string
+        example: Tekst
+
+  Obraz:
+    title: Obraz
+    type: object
+    properties:
+      Id:
+        type: string
+        example: 123e4567-e89b-12d3-a456-426614174000
+      Tytul:
+        type: string
+        example: Obraz X
+      Opis:
+        type: string
+        example: Lorem ipsum
+      Data:
+        type: string
+        example: 26-10-2022
+      NazwaPliku:
+        type: string
+        example: Plik X
+      Sciezka:
+        type: string
+        example: Sciezka X
+      Rozmiar:
+        type: string
+        example: 123 MB
+
+  Komentarz:
+    title: Komentarz
+    type: object
+    properties:
+      Id:
+        type: string
+        example: 123e4567-e89b-12d3-a456-426614174000
+      Tresc:
+        type: string
+        example: Tekst
+      Data:
+        type: string
+        example: 10:10:10 26-10-2022
+
+  Miniatura:
+    title: Miniatura
+    type: object
+    properties:
+      Typ:
+        type: string
+        example: Tekst
